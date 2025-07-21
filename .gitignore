@@ -49,3 +49,7 @@ productImge/cache/
 
 # Ignore secrets
 *.env 
+
+#ignore bussiness files
+xlsx_to_json.py
+شيت المنتجات.xlsx
