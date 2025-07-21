@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="زد لاند: موقع زراعي متكامل يقدم منتجات وخدمات زراعية عضوية عالية الجودة، استشارات وبرامج تسميد، إشراف زراعي، تسوق الآن!" />
+  <meta name="keywords"
+    content="زراعة, منتجات زراعية, عضوي, اسمدة, استشارات زراعية, برامج تسميد, إشراف زراعي, زد لاند, تسوق, متجر زراعي" />
+  <meta name="author" content="موقع زراعي" />
+  <!-- font awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <!-- bootstrap -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css"
+    integrity="sha384-gXt9imSW0VcJVHezoNQsP+TNrjYXoGcrqBZJpry9zJt8PCQjobwmhMGaDHTASo9N" crossorigin="anonymous" />
+  <!-- google fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap" rel="stylesheet" />
+  <!-- master style -->
+  <link rel="stylesheet" href="master.css" />
+  <!-- favicon -->
+  <link rel="shortcut icon" href="favlogo.png" type="image/x-icon">
+  <title>زد لاند | منتجات وخدمات زراعية عضوية عالية الجودة</title>
+  <meta property="og:title" content="زد لاند | منتجات وخدمات زراعية عضوية عالية الجودة" />
+  <meta property="og:description"
+    content="زد لاند: موقع زراعي متكامل يقدم منتجات وخدمات زراعية عضوية عالية الجودة، استشارات وبرامج تسميد، إشراف زراعي، تسوق الآن!" />
+  <meta property="og:image" content="assets/logo-sm.svg" />
+  <meta property="og:url" content="https://zland.eg/" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="زد لاند | منتجات وخدمات زراعية عضوية عالية الجودة" />
+  <meta name="twitter:description"
+    content="زد لاند: موقع زراعي متكامل يقدم منتجات وخدمات زراعية عضوية عالية الجودة، استشارات وبرامج تسميد، إشراف زراعي، تسوق الآن!" />
+  <meta name="twitter:image" content="assets/logo-sm.svg" />
+</head>
+
+<body>
+  <!-- start header -->
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+      <a class="navbar-brand" href="index.html"><img src="assets/logo-sm.svg" alt="" /></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="index.html">الرئيسه</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">تواصل معنا</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="shop.html">منتجاتنا</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="services.html" id="navbarDropdown" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              خدماتنا
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li>
+                <a class="dropdown-item" href="consultation.html">الاستشارات الزراعيه</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="planetProg.html">البرامج التسميديه</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="supervision.html">الاشراف الزراعى</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">من نحن</a>
+          </li>
+        </ul>
+      </div>
+      <!-- Cart Icon/Button -->
+      <button id="cart-btn" class="btn btn-outline-success position-relative ms-3" type="button" data-bs-toggle="modal"
+        data-bs-target="#cartModal">
+        <i class="fa fa-shopping-cart"></i>
+        <span id="cart-count"
+          class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+      </button>
+      <!-- End Cart Icon/Button -->
+    </div>
+  </nav>
+  <!-- end header -->
+
+  <!-- start hero section -->
+  <div class="container py-5">
+    <div class="row align-items-center">
+      <div class="col-md-6 hero-img">
+        <img src="assets/hero picture.svg" alt="Responsive Image" class="hero-img" />
+      </div>
+
+      <div class="col-md-6 hero-text">
+        <h2>معا لازدهار زراعتك</h2>
+        <p>السلام عليكم ..</p>
+        <a href="engineer.html" class="btn primary-btn">اشترى الان</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="spliter"></div>
+  <!-- end hero section -->
+
+  <!-- start categories -->
+  <!-- <div class="sectors">الاقسام</div>
+  <div class="categories">
+    <div class="row justify-content-center">
+      <div class="col category-item">
+        <div class="category-icon">
+          <img src="assets/Fertilizer-categories.svg" alt="" />
+        </div>
+        <h6>اسمده</h6>
+      </div>
+
+      <div class="col category-item">
+        <div class="category-icon">
+          <img src="assets/tools-categories.svg" alt="" />
+        </div>
+        <h6>ادوات</h6>
+      </div>
+
+      <div class="col category-item">
+        <div class="category-icon">
+          <img src="assets/pots-planet-categories.svg" alt="" />
+        </div>
+        <h6>وعاء نبات</h6>
+      </div>
+
+      <div class="col category-item">
+        <div class="category-icon">
+          <img src="assets/soil-categories.svg" alt="" />
+        </div>
+        <h6>تربة</h6>
+      </div>
+
+      <div class="col category-item">
+        <div class="category-icon">
+          <img src="assets/fish-food.svg" alt="" />
+        </div>
+        <h6>غذاء اسماك</h6>
+      </div>
+    </div>
+  </div> -->
+  <!-- end categories -->
+
+  <!-- statrt offers -->
+  <div class="sectors">العروض</div>
+  <div class="container offers">
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+          aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+          aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+          aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="assets/desscount 10 percentage.jpg" class="d-block w-100" alt="عرض خاص 1" />
+        </div>
+        <div class="carousel-item">
+          <img src="assets/desscount 20 percentage.jpg" class="d-block w-100" alt="عرض خاص 2" />
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+  <!-- end offers  -->
+
+  <!-- start best sells -->
+  <div class="sectors">الاكثر مبيعا</div>
+  <div class="container most-sells">
+    <div class="row row-cols-2 row-cols-md-3 g-4" id="index-products-container"></div>
+    <div class="text-center mt-4">
+      <a href="shop.html" class="btn primary-btn">عرض كل المنتجات</a>
+    </div>
+  </div>
+  <!-- end best sells -->
+
+  <!-- Cart Modal -->
+  <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="cartModalLabel">سلة المشتريات</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <ul id="cart-items" class="list-group mb-3 p-0"></ul>
+          <div class="d-flex justify-content-between align-items-center">
+            <span>الإجمالي: <span id="cart-total">0</span> ج.م</span>
+            <button id="checkout-btn" class="btn btn-success">إتمام الشراء عبر واتساب</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Cart Modal -->
+
+  <!-- start footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <!-- Company Info Column -->
+        <div class="footer-column company-info">
+          <a class="footer-logo" href="index.html">
+            <img src="assets/logo-sm.svg" alt="Company Logo" />
+          </a>
+          <p class="company-description">
+            نحن منظمة زراعية مهتمة بتطوير طريقة
+            <br />
+            زراعية جديدة في المجال العضوي.
+          </p>
+          <div class="social-links">
+            <a href="https://www.facebook.com/share/19qjjkoZmh/" class="facebook" target="_blank" rel="noopener"
+              aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.instagram.com/z_land1?igsh=a21wdDE3N29xN3I3" class="instagram" target="_blank"
+              rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://youtube.com/@z_land_1?si=Su5i7Cm4VIRvrhUr" class="youtube" target="_blank" rel="noopener"
+              aria-label="Youtube"><i class="fab fa-youtube"></i></a>
+            <a href="https://wa.me/201021944642" class="whatsapp" target="_blank" rel="noopener"
+              aria-label="Whatsapp"><i class="fab fa-whatsapp"></i></a>
+            <a href="mailto:zlandfertilizer@gmail.com" class="email" target="_blank" rel="noopener"
+              aria-label="Email"><i class="fas fa-envelope"></i></a>
+            <a href="https://tiktok.com/@z.land1" class="tiktok" target="_blank" rel="noopener" aria-label="TikTok"><i
+                class="fab fa-tiktok"></i></a>
+          </div>
+        </div>
+
+        <!-- Quick Links Column -->
+        <div class="footer-column">
+          <h3>روابط سريعة</h3>
+          <ul>
+            <li><a href="index.html">الرئيسية</a></li>
+            <li><a href="contact.html">تواصل معنا</a></li>
+            <li><a href="shop.html">منتجاتنا</a></li>
+            <li><a href="services.html">خدماتنا</a></li>
+            <li><a href="about.html">من نحن</a></li>
+          </ul>
+        </div>
+
+        <!-- Features Column -->
+        <div class="footer-column">
+          <h3>قريبا</h3>
+          <ul>
+            <li><a href="consultation.html">الاستشارات الزراعية</a></li>
+            <li><a href="planetProg.html">البرامج التسميدية</a></li>
+            <li><a href="supervision.html">الاشراف الزراعي</a></li>
+            <li><a href="shop.html">المنتجات العضوية</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact Info Column -->
+        <div class="footer-column"></div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="copyright">© 2025 جميع الحقوق محفوظة</p>
+      </div>
+    </div>
+
+    <div class="decorative-symbol">
+      <img src="assets/Frame 383.svg" alt="Decorative Element" />
+    </div>
+  </footer>
+
+  <!-- end footer -->
+
+  <!-- Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+    integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+    crossorigin="anonymous"></script>
+
+  <!-- main script -->
+  <script type="module" src="main.js"></script>
+</body>
+
+</html>
