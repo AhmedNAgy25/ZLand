@@ -66,7 +66,7 @@
       product.size
     )}`;
     modalContent.innerHTML = `
-      <h6 class="text-muted mb-3">${product["خصائص المنتج وفائده"] || ""}</h6>
+      <h6 class="text-muted mb-3 rtl-text">${product["خصائص المنتج وفائده"] || ""}</h6>
       <div class="mb-3"><strong>التصنيف:</strong> ${
         product["تصنيف المنتج"] || ""
       }</div>

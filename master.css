@@ -783,3 +783,12 @@ footer {
 .social-links a:hover {
   opacity: 0.8;
 }
+
+.rtl-text {
+  direction: rtl;
+  text-align: justify;
+}
+#modalContent {
+  direction: rtl;
+  text-align: justify;
+}
