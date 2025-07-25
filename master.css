@@ -37,6 +37,11 @@ body {
 
 /* start header */
 .navbar {
+  position: sticky;
+  top: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: #d2e3d6;
   border-bottom: 0.5px solid #16201a5b;
   box-shadow: 0px 5px 8px 1px #16492b1f;
   color: var(--Fonts);
@@ -330,6 +335,8 @@ footer {
 .social-links {
   display: flex;
   gap: 1rem;
+  position: relative;
+  z-index: 2;
 }
 
 .social-links a {
@@ -465,7 +472,7 @@ footer {
   }
 
   .company-description {
-    text-align: center;
+    text-align: justify;
   }
 
   .social-links {
@@ -760,7 +767,8 @@ footer {
   background-color: white !important;
 }
 .company-description {
-  text-align: end;
+  text-align: start;
+  direction: rtl;
 }
 .social-links a.facebook {
   color: #1877f2;
@@ -791,4 +799,18 @@ footer {
 #modalContent {
   direction: rtl;
   text-align: justify;
+}
+
+.car-controller button {
+  border-radius: 0;
+}
+.item-card-container {
+  padding: 5px 10px;
+}
+.item-card-container span {
+  text-align: center;
+}
+
+.item-card-container span {
+  font-size: 12px;
 }

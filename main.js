@@ -3,8 +3,8 @@
     return String(num).replace(/[0-9]/g, (d) => "٠١٢٣٤٥٦٧٨٩"[d]);
   }
   function getSizeLabel(size) {
-    if (size === "large") return "1 لتر";
-    if (size === "small") return "0.25 لتر";
+    if (size === "large") return "1000 mL";
+    if (size === "small") return "250 mL";
     return "";
   }
   function truncate(text, max = 80) {
@@ -20,7 +20,7 @@
     return `productImge/${name}.jpg`;
   }
 
-  const currentOfferPercent = 10; 
+  const currentOfferPercent = 10;
   function getDiscountedPrice(price) {
     return Math.round(price * (1 - currentOfferPercent / 100));
   }
@@ -66,7 +66,9 @@
       product.size
     )}`;
     modalContent.innerHTML = `
-      <h6 class="text-muted mb-3 rtl-text">${product["خصائص المنتج وفائده"] || ""}</h6>
+      <h6 class="text-muted mb-3 rtl-text">${
+        product["خصائص المنتج وفائده"] || ""
+      }</h6>
       <div class="mb-3"><strong>التصنيف:</strong> ${
         product["تصنيف المنتج"] || ""
       }</div>
@@ -149,6 +151,26 @@
     saveCart(cart);
     updateCartUI();
   }
+  function increaseQty(index) {
+    let cart = getCart();
+    cart[index].qty += 1;
+    saveCart(cart);
+    updateCartUI();
+  }
+
+  function decreaseQty(index) {
+    let cart = getCart();
+    if (cart[index].qty > 1) {
+      cart[index].qty -= 1;
+    } else {
+      cart.splice(index, 1);
+    }
+    saveCart(cart);
+    updateCartUI();
+  }
+
+  window.increaseQty = increaseQty;
+  window.decreaseQty = decreaseQty;
   function updateCartUI() {
     const cart = getCart();
     const cartCount = document.getElementById("cart-count");
@@ -162,12 +184,10 @@
           ? '<li class="list-group-item">سلة المشتريات فارغة</li>'
           : "";
       cart.forEach((item, idx) => {
-        cartItems.innerHTML += `<li class="list-group-item d-flex justify-content-between align-items-center">
+        cartItems.innerHTML += `<li class="list-group-item d-flex justify-content-between align-items-center item-card-container">
           <span>
             <span dir="ltr" style="unicode-bidi: embed;">${item["الاسم"]}</span>
-            <span dir="rtl" style="unicode-bidi: embed;">${getSizeLabel(
-              item.size
-            )}</span>
+            <span style="unicode-bidi: embed;">${getSizeLabel(item.size)}</span>
             ×
             <span dir="rtl" style="unicode-bidi: embed;">${toArabicNumber(
               item.qty
@@ -176,7 +196,11 @@
           <span>${toArabicNumber(
             getDiscountedPrice(item.price) * item.qty
           )} ج.م</span>
-          <button class="btn btn-sm btn-danger ms-2" onclick="removeFromCart(${idx})">حذف</button>
+          <div class="btn-group ms-2 car-controller" role="group">
+            <button class="btn btn-sm btn-btn-success border-0 bg-success" onclick="increaseQty(${idx})">+</button>
+            <button class="btn btn-sm btn-danger ms-1 border-0 me-1" onclick="removeFromCart(${idx})">حذف</button>
+            <button class="btn btn-sm btn-btn-success border-0 bg-success" onclick="decreaseQty(${idx})">-</button>
+          </div>
         </li>`;
       });
     }
@@ -190,7 +214,7 @@
   }
   window.removeFromCart = removeFromCart;
   window.addToCart = addToCart;
-  
+
   function checkoutCart() {
     const cart = getCart();
     if (cart.length === 0) return;
@@ -301,13 +325,11 @@
     `;
   }
 
-  
   document.addEventListener("DOMContentLoaded", async () => {
     try {
       const res = await fetch("items.json");
       const products = await res.json();
 
-  
       const homeContainer = document.getElementById("index-products-container");
       if (homeContainer) {
         homeContainer.innerHTML = "";
@@ -321,7 +343,6 @@
         });
       }
 
-  
       const shopContainer = document.getElementById("products-container");
       if (shopContainer) {
         shopContainer.innerHTML = "";
