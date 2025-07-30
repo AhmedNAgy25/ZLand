@@ -437,6 +437,9 @@ footer {
   .footer-content {
     grid-template-columns: repeat(2, 1fr);
   }
+  .hero-img{
+    margin-bottom: 2rem;
+  }
 
   .company-info {
     grid-column: 1 / -1;
@@ -795,6 +798,9 @@ footer {
 .rtl-text {
   direction: rtl;
   text-align: justify;
+}
+.rtl{
+    direction: rtl;
 }
 #modalContent {
   direction: rtl;
