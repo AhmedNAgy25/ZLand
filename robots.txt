@@ -1,0 +1,49 @@
+User-agent: *
+Allow: /
+
+# Allow all important pages
+Allow: /index.html
+Allow: /shop.html
+Allow: /about.html
+Allow: /contact.html
+Allow: /services.html
+Allow: /consultation.html
+Allow: /planetProg.html
+Allow: /supervision.html
+Allow: /engineer.html
+
+# Allow assets and resources
+Allow: /assets/
+Allow: /master.css
+Allow: /main.js
+Allow: *.css
+Allow: *.js
+Allow: *.webp
+Allow: *.svg
+Allow: *.jpg
+Allow: *.png
+Allow: *.webp
+
+# Disallow common unnecessary files
+Disallow: *.log
+Disallow: /tmp/
+Disallow: /cache/
+Disallow: /.git/
+Disallow: /node_modules/
+Disallow: /backup/
+
+# Block bots that are known to be problematic
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+# Crawl delay for respectful crawling
+Crawl-delay: 1
+
+# Sitemap location 
+Sitemap: https://zland.eg/sitemap.xml

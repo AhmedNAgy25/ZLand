@@ -1,0 +1,29 @@
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "زد لاند",
+  "description": "موقع زراعي متكامل يقدم منتجات وخدمات زراعية عضوية عالية الجودة، استشارات وبرامج تسميد، إشراف زراعي",
+  "url": "https://zland.eg",
+  "telephone": "+201021944642",
+  "email": "zlandfertilizer@gmail.com",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "الزقازيق",
+    "addressRegion": "الشرقية",
+    "addressCountry": "EG"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "30.5877",
+    "longitude": "31.5018"
+  },
+  "openingHours": "Mo-Sa 09:00-18:00",
+  "priceRange": "$$",
+  "servesCuisine": "Agricultural Products",
+  "sameAs": [
+    "https://www.facebook.com/share/19qjjkoZmh/",
+    "https://www.instagram.com/z_land1",
+    "https://youtube.com/@z_land_1",
+    "https://tiktok.com/@z.land1"
+  ]
+}
