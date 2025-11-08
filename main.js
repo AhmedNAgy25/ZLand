@@ -136,7 +136,7 @@
         </div>
 
         <!-- Only show product features/benefits -->
-        <h6 class="card-subtitle mb-3 text-muted" style="font-size:0.95em;">
+        <h6 class="card-subtitle mb-3 text-muted" style="font-size:0.95em;direction: rtl;text-align: start">
           ${e(c["خصائص المنتج وفائده"], 200)}
         </h6>
 
