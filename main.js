@@ -222,7 +222,7 @@
       // Set modal content
       contentElement.innerHTML = `
         <h6 class="text-muted mb-3 rtl-text">${
-          product["خصائص المنتج وفائده"] || ""
+          product["مميزات المنتج"] || ""
         }</h6>
         <div class="mb-3"><strong>التصنيف:</strong> ${
           product["تصنيف المنتج"] || ""
@@ -301,7 +301,7 @@
             </div>
 
             <h6 class="card-subtitle mb-3 text-muted" style="font-size:0.95em;direction: rtl;text-align: start">
-              ${utils.truncateText(product["خصائص المنتج وفائده"], 200)}
+              ${utils.truncateText(product["مميزات المنتج"], 200)}
             </h6>
 
             <div class="mt-auto d-flex flex-column align-items-end justify-content-end" style="margin-top: auto;">
