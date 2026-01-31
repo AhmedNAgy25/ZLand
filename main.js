@@ -31,13 +31,13 @@
 
     // Generate product image path
     getProductImagePath: (product) => {
-      const name = (product["الاسم"] || "").trim();
+      const key = (product.key || product["الاسم"] || "").trim();
       const size = (product.size || "").trim();
 
       if (size && size !== "unknown") {
-        return `${PRODUCT_IMAGE_BASE_PATH}${name} ${size}.jpg`;
+        return `${PRODUCT_IMAGE_BASE_PATH}${key} ${size}.jpg`;
       }
-      return `${PRODUCT_IMAGE_BASE_PATH}${name}.jpg`;
+      return `${PRODUCT_IMAGE_BASE_PATH}${key}.jpg`;
     },
   };
 
@@ -54,8 +54,7 @@
     addToCart: (product) => {
       const cart = cartManager.getCart();
       const existingItemIndex = cart.findIndex(
-        (item) =>
-          item["الاسم"] === product["الاسم"] && item.size === product.size
+        (item) => item.key === product.key && item.size === product.size,
       );
 
       if (existingItemIndex > -1) {
@@ -116,15 +115,15 @@
               (item, index) => `
             <li class="list-group-item d-flex justify-content-between align-items-center item-card-container">
               <span>
-                <span dir="ltr" style="unicode-bidi: embed;">${
+                <span dir="rtl" style="unicode-bidi: embed; display: block;">${
                   item["الاسم"]
                 }</span>
-                <span style="unicode-bidi: embed;">${utils.getSizeDisplay(
-                  item.size
+                <span dir="ltr" style="unicode-bidi: embed; display: block; font-size: 0.85em; color: #666;">${utils.getSizeDisplay(
+                  item.size,
                 )}</span>
                 ×
                 <span dir="rtl" style="unicode-bidi: embed;">${utils.toEasternNumerals(
-                  item.qty
+                  item.qty,
                 )}</span>
               </span>
               <span>${utils.toEasternNumerals(item.price * item.qty)} ج.م</span>
@@ -134,7 +133,7 @@
                 <button class="btn btn-sm btn-btn-success border-0 bg-success" onclick="cartManager.decreaseQuantity(${index})">-</button>
               </div>
             </li>
-          `
+          `,
             )
             .join("");
         }
@@ -144,7 +143,7 @@
       if (totalElement) {
         const totalAmount = cart.reduce(
           (sum, item) => sum + item.price * item.qty,
-          0
+          0,
         );
         totalElement.textContent = utils.toEasternNumerals(totalAmount);
       }
@@ -208,19 +207,23 @@
       modalManager.initModal();
 
       const modal = new bootstrap.Modal(
-        document.getElementById("productModal")
+        document.getElementById("productModal"),
       );
       const titleElement = document.getElementById("productModalLabel");
       const contentElement = document.getElementById("modalContent");
       const imageElement = document.getElementById("modalProductImg");
 
       // Set modal title
-      titleElement.textContent = `${
-        product["الاسم"] || "منتج"
-      } - ${utils.getSizeDisplay(product.size)}`;
+      const isNewBadge =
+        product.new === 1
+          ? ` <span class="badge bg-success text-white" style="font-size: 0.8rem;">جديد</span>`
+          : "";
+      titleElement.textContent = `${product["الاسم"] || "منتج"}`;
+      titleElement.innerHTML = `${product["الاسم"] || "منتج"}${isNewBadge}`;
 
       // Set modal content
       contentElement.innerHTML = `
+        <div class="mb-2"><strong>الحجم:</strong> ${utils.getSizeDisplay(product.size)}</div>
         <h6 class="text-muted mb-3 rtl-text">${
           product["مميزات المنتج"] || ""
         }</h6>
@@ -278,24 +281,31 @@
   const productTemplates = {
     createProductCard: (product, { showReadMore = true } = {}) => {
       const safeProductJson = JSON.stringify(product).replace(/\"/g, "&quot;");
+      const isNewBadge =
+        product.new === 1
+          ? `<span class="badge bg-success text-white position-absolute" style="top: 10px; right: 10px; font-size: 0.8rem;">جديد</span>`
+          : "";
 
       return `
         <div class="card h-100 shadow w-100" style="min-height: 420px; display: flex; flex-direction: column;">
-          <img src="${utils.getProductImagePath(product)}" 
-               class="card-img-top" 
-               alt="${product["الاسم"] || "منتج"}"
-               style="object-fit: contain; height: 180px; background: #f8f8f8; cursor: pointer;"
-               onerror="this.src='${DEFAULT_PRODUCT_IMAGE}'"
-               onclick="modalManager.showProductDetails(${safeProductJson})" />
+          <div class="position-relative">
+            <img src="${utils.getProductImagePath(product)}"
+                 class="card-img-top"
+                 alt="${product["الاسم"] || "منتج"}"
+                 style="object-fit: contain; height: 180px; background: #f8f8f8; cursor: pointer;"
+                 onerror="this.src='${DEFAULT_PRODUCT_IMAGE}'"
+                 onclick="modalManager.showProductDetails(${safeProductJson})" />
+            ${isNewBadge}
+          </div>
           <div class="card-body d-flex flex-column" style="flex: 1 1 auto; min-height: 200px;">
             <div style="margin-bottom: 0.5rem;">
               <span class="card-title" style="display:block;font-size:1.35rem;font-weight:800;color:var(--Primary);line-height:1.2;">
-                ${product["الاسم"] || ""} 
-                <span style="font-size:0.8em;color:#888;">${utils.getSizeDisplay(
-                  product.size
-                )}</span>
+                ${product["الاسم"] || ""}
               </span>
-              <span class="card-category" style="display:block;font-size:1rem;font-weight:500;color:#4e6e4e;opacity:0.85;margin-top:0.15em;">
+              <span class="card-category" style="display:block;font-size:1rem;font-weight:500;color:#888888;opacity:0.85;margin-top:0.15em;">
+                ${utils.getSizeDisplay(product.size)}
+              </span>
+              <span class="card-category-c color-[#4e6e4e]" style="display:block;font-size:0.9rem;font-weight:400;color:#4e6e4e !important;opacity:0.75;margin-top:0.1em;">
                 ${product["تصنيف المنتج"] || ""}
               </span>
             </div>
@@ -371,7 +381,7 @@
         '<div class="alert alert-danger">تعذر تحميل المنتجات أو عرضها.</div>';
 
       const indexContainer = document.getElementById(
-        "index-products-container"
+        "index-products-container",
       );
       const allProductsContainer =
         document.getElementById("products-container");
