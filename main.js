@@ -3,6 +3,7 @@
   const CART_STORAGE_KEY = "zland_cart";
   const DEFAULT_PRODUCT_IMAGE = "assets/product.png";
   const PRODUCT_IMAGE_BASE_PATH = "productImge/";
+  const DISCOUNT_PERCENT = 0.1;
 
   // Utility Functions
   const utils = {
@@ -38,6 +39,30 @@
         return `${PRODUCT_IMAGE_BASE_PATH}${key} ${size}.jpg`;
       }
       return `${PRODUCT_IMAGE_BASE_PATH}${key}.jpg`;
+    },
+
+    // Calculate discounted price
+    getDiscountedPrice: (price) => {
+      return Math.round(price * (1 - DISCOUNT_PERCENT));
+    },
+
+    // Format price with discount display
+    formatPriceWithDiscount: (price) => {
+      const discountedPrice = utils.getDiscountedPrice(price);
+      return `
+        <span style="text-decoration: line-through; color: #999; font-size: 0.8em; margin-left: 5px;">${utils.toEasternNumerals(price)}</span>
+        <span style="color: var(--Primary); font-weight: bold;">${utils.toEasternNumerals(discountedPrice)}</span>
+        <span> ج.م</span>
+      `;
+    },
+
+    // Format price with discount (simple version for cart)
+    formatPriceSimple: (price, showOriginal = false) => {
+      const discountedPrice = utils.getDiscountedPrice(price);
+      if (showOriginal && discountedPrice !== price) {
+        return `<span style="text-decoration: line-through; color: #999; font-size: 0.8em;">${utils.toEasternNumerals(price)}</span> ${utils.toEasternNumerals(discountedPrice)}`;
+      }
+      return utils.toEasternNumerals(discountedPrice);
     },
   };
 
@@ -111,8 +136,10 @@
             '<li class="list-group-item">سلة المشتريات فارغة</li>';
         } else {
           itemsElement.innerHTML = cart
-            .map(
-              (item, index) => `
+            .map((item, index) => {
+              const discountedPrice = utils.getDiscountedPrice(item.price);
+              const itemTotal = discountedPrice * item.qty;
+              return `
             <li class="list-group-item d-flex justify-content-between align-items-center item-card-container">
               <span>
                 <span dir="rtl" style="unicode-bidi: embed; display: block;">${
@@ -121,30 +148,36 @@
                 <span dir="ltr" style="unicode-bidi: embed; display: block; font-size: 0.85em; color: #666;">${utils.getSizeDisplay(
                   item.size,
                 )}</span>
+                <small style="color: #999; text-decoration: line-through;">${utils.toEasternNumerals(
+                  item.price,
+                )} ج.م</small>
+                <span style="color: var(--Primary); font-weight: bold;">${utils.toEasternNumerals(
+                  discountedPrice,
+                )} ج.م</span>
                 ×
                 <span dir="rtl" style="unicode-bidi: embed;">${utils.toEasternNumerals(
                   item.qty,
                 )}</span>
               </span>
-              <span>${utils.toEasternNumerals(item.price * item.qty)} ج.م</span>
+              <span>${utils.toEasternNumerals(itemTotal)} ج.م</span>
               <div class="btn-group ms-2 car-controller" role="group">
                 <button class="btn btn-sm btn-btn-success border-0 bg-success" onclick="cartManager.increaseQuantity(${index})">+</button>
                 <button class="btn btn-sm btn-danger ms-1 border-0 me-1" onclick="cartManager.removeFromCart(${index})">حذف</button>
                 <button class="btn btn-sm btn-btn-success border-0 bg-success" onclick="cartManager.decreaseQuantity(${index})">-</button>
               </div>
             </li>
-          `,
-            )
+          `;
+            })
             .join("");
         }
       }
 
       // Update total
       if (totalElement) {
-        const totalAmount = cart.reduce(
-          (sum, item) => sum + item.price * item.qty,
-          0,
-        );
+        const totalAmount = cart.reduce((sum, item) => {
+          const discountedPrice = utils.getDiscountedPrice(item.price);
+          return sum + discountedPrice * item.qty;
+        }, 0);
         totalElement.textContent = utils.toEasternNumerals(totalAmount);
       }
     },
@@ -155,13 +188,18 @@
 
       let message = "أرغب في شراء المنتجات التالية:%0A";
       cart.forEach((item) => {
+        const discountedPrice = utils.getDiscountedPrice(item.price);
+        const itemTotal = discountedPrice * item.qty;
         message += `- ${item["الاسم"]} ${utils.getSizeDisplay(item.size)} × ${
           item.qty
-        } = ${item.price * item.qty} ج.م%0A`;
+        } = ${itemTotal} ج.م (السعر الأصلي: ${item.price} ج.م، بعد الخصم: ${discountedPrice} ج.م)%0A`;
       });
 
-      const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-      message += `%0Aالإجمالي: ${total} ج.م`;
+      const total = cart.reduce((sum, item) => {
+        const discountedPrice = utils.getDiscountedPrice(item.price);
+        return sum + discountedPrice * item.qty;
+      }, 0);
+      message += `%0Aالإجمالي (مع الخصم 10%): ${total} ج.م`;
 
       window.open(`https://wa.me/201021944642?text=${message}`, "_blank");
       cartManager.saveCart([]);
@@ -247,8 +285,9 @@
         }</p></div>
         <div class="mt-4">
           <h3 lang="ar" style="color: var(--Primary);">
-            ${utils.toEasternNumerals(product.price)}<span> ج.م</span>
+            ${utils.formatPriceWithDiscount(product.price)}
           </h3>
+          <span class="badge bg-warning text-dark mt-2">خصم 10%</span>
         </div>
       `;
 
@@ -305,7 +344,7 @@
               <span class="card-category" style="display:block;font-size:1rem;font-weight:500;color:#888888;opacity:0.85;margin-top:0.15em;">
                 ${utils.getSizeDisplay(product.size)}
               </span>
-              <span class="card-category-c color-[#4e6e4e]" style="display:block;font-size:0.9rem;font-weight:400;color:#4e6e4e !important;opacity:0.75;margin-top:0.1em;">
+              <span class="card-category-c color-[#02e302]" style="display:block;font-size:0.9rem;font-weight:400;color:#02e302 !important;opacity:0.75;margin-top:0.1em;">
                 ${product["تصنيف المنتج"] || ""}
               </span>
             </div>
@@ -315,8 +354,8 @@
             </h6>
 
             <div class="mt-auto d-flex flex-column align-items-end justify-content-end" style="margin-top: auto;">
-              <h3 lang="ar" class="mt-2 mb-2" style="font-size: 1.5em; color: var(--Primary);">
-                ${utils.toEasternNumerals(product.price)}<span> ج.م</span>
+              <h3 lang="ar" class="mt-2 mb-2" style="font-size: 1.5em;">
+                ${utils.formatPriceWithDiscount(product.price)}
               </h3>
 
               <div class="d-flex gap-2 w-100">
